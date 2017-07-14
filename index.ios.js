@@ -18,4 +18,6 @@
 //
 // AppRegistry.registerComponent('firstProject', () => FadeInViewApp);
 // import './app'
-import './navigators/DrawerNavigators'
+import { AppRegistry } from 'react-native'
+
+import App from './navigators/DrawerNavigators'
