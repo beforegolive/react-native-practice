@@ -20,4 +20,6 @@
 // import './app'
 import { AppRegistry } from 'react-native'
 
-import App from './navigators/DrawerNavigators'
+import MyApp from './navigators/DrawerNavigators'
+
+AppRegistry.registerComponent('firstProject', () => MyApp);

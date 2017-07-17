@@ -35,7 +35,7 @@ class MyHomeScreen extends Component {
 	componentDidMount(){
     setTimeout(()=>{
       SplashScreen.hide()
-    }, 3000)
+    }, 1000)
 
 		setImmediate(()=>{
 			console.log('---------------------- setImmediate1',)
@@ -162,4 +162,4 @@ const MyApp = DrawerNavigator(
   }
 );
 
-AppRegistry.registerComponent('firstProject', () => MyApp);
+export default MyApp
