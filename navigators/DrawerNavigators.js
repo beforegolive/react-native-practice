@@ -10,11 +10,13 @@ import {
 	TextInput,
 	Platform,
 	Animated,
-	InteractionManager
+	InteractionManager,
+  Alert
 } from 'react-native';
 import { DrawerNavigator } from 'react-navigation';
 import SplashScreen from 'react-native-splash-screen'
 import PlatformButton from './components/platformButton'
+import codePush from 'react-native-code-push'
 
 class MyHomeScreen extends Component {
 	state = {
@@ -75,10 +77,10 @@ class MyHomeScreen extends Component {
       <View>
         <Button
           onPress={() => this.props.navigation.navigate('DrawerOpen')}
-          title="Go to notifications  wifi app123"
+          title="Go to notifications  wifi"
           style={styles.marginAll}
         />
-        <Text style={styles.marginAll}>this is Text</Text>
+        <Text style={styles.marginAll}>this is Text 更新v3？</Text>
         <Button style={[styles.marginAll]} color="red" title="另外一个button"
 					onPress={()=>{
 						console.log('Platform.OS:',Platform.OS)
@@ -89,13 +91,35 @@ class MyHomeScreen extends Component {
 				<TextInput value='abcd' editable={true} ></TextInput>
 				<PlatformButton />
 				<Animated.Image style={{opacity:this.state.val}} source={require('../imgs/avatar.png')} >
-					<Text>写点字</Text>
+					<Text>写点字:code-push update</Text>
 				</Animated.Image>
-				<FlatList
-					data={[{key:'a', id:1},{key:'b',id:2},{key:'c', id:3}]}
-					renderItem={({item})=> <Text>{item.key}</Text>}
-					keyExtractor={(item)=> item.id}
-				/>
+        <Button
+          onPress={() => {
+            console.log('sync before')
+            // codePush.sync({
+            //   updateDialog: true,
+            //   installMode: codePush.InstallMode.IMMEDIATE
+            // })
+            codePush.checkForUpdate()
+            .then(update=>{
+              if(!update){
+                Alert.alert('已是最新')
+              } else {
+                Alert.alert('有新的版本，更新吧.')
+                codePush.sync({
+                  updateDialog: true,
+                  installMode: codePush.InstallMode.IMMEDIATE
+                })
+              }
+
+              console.log('====update:',update)
+            })
+            // Alert.alert('title')
+            // console.log('sync after')
+          }}
+          title="code-push sync"
+          style={styles.marginAll}
+        />
       </View>
     );
   }
@@ -162,4 +186,6 @@ const MyApp = DrawerNavigator(
   }
 );
 
-export default MyApp
+let codePushOptions = { checkFrequency: codePush.CheckFrequency.MANUAL}
+
+export default codePush(MyApp)
