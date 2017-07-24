@@ -9,7 +9,7 @@ do
 		then
 			lastCommit=`git rev-parse HEAD`;
 			echo 'start push mirror...';
-			git push --mirror https://git.oschina.net/xulianghui1/mirror-push-test.git;
+			git push --mirror https://xulianghui1:xiaohui890@git.oschina.net/xulianghui1/mirror-push-test.git;
 		fi
     sleep 5
 done
