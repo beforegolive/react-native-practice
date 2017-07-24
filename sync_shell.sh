@@ -3,7 +3,7 @@ lastCommit=`git rev-parse HEAD`
 while [ 1 ]
 do
     echo 'while start...';
-		git fetch;
+		git pull;
 		currCommit=`git rev-parse HEAD`;
 		if [ $lastCommit != $currCommit ]
 		then
