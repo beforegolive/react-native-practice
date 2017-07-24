@@ -11,5 +11,5 @@ do
 			echo 'start push mirror...';
 			git push --mirror https://git.oschina.net/xulianghui1/mirror-push-test.git;
 		fi
-    sleep 6
+    sleep 5
 done
